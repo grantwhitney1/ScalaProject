@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Home
+        </title>
+    </head>
+
+    <body>
+        <div id = "response">
+        </div>
+        <div id = "button">
+            <button onclick="handleClick()" method="delete" action="http://localhost:9000/get/todo">
+                Clear Complete
+            </button>
+        </div>
+    </body>
+</html>
+
+<script>
+    var object = document.getElementById("response")
+
+    getTodos();
+
+    async function getTodos() {
+        const response = await fetch('http://localhost:9000/get/todo', {
+            method: 'GET'
+        })
+
+        const data = await response.json();
+
+        console.log(data)
+        data.forEach(x => {
+            let h1 = document.createElement("h1")
+            h1.innerText = x.description + ", complete: " + x.isDone
+            object.appendChild(h1)
+        })
+    }
+
+    async function handleClick() {
+        await fetch('http://localhost:9000/delete/todo', {
+            method: 'DELETE'
+        })
+
+        object.innerHTML = ''
+
+        getTodos()
+    }
+
+    
+</script>

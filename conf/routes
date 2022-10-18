@@ -6,11 +6,13 @@
 # An example controller showing a sample home page
 # GET     /                           controllers.HomeController.index()
 # Controller for Todo List
-GET     /                             controllers.TodoListController.getAll
-GET     /:itemId                      controllers.TodoListController.getById(itemId: Long)
-PUT     /done/:itemId                 controllers.TodoListController.markAsDone(itemId: Long)
-DELETE  /                             controllers.TodoListController.deleteAllDone
-POST    /                             controllers.TodoListController.addNewItem
+GET     /                             controllers.PageController.Home
+GET     /get/todo                     controllers.TodoListController.getAll
+GET     /get/todo/:itemId             controllers.TodoListController.getById(itemId: Long)
+PUT     /edit/todo/done/:itemId       controllers.TodoListController.markAsDone(itemId: Long)
++nocsrf
+DELETE  /delete/todo                  controllers.TodoListController.deleteAllDone
+POST    /new/todo                     controllers.TodoListController.addNewItem
 
 # Map static resources from the /public folder to the /assets URL path
 # GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
