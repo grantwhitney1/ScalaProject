@@ -36,19 +36,6 @@ class entriesController @Inject()(val controllerComponents: ControllerComponents
         }
     }
 
-    def markAsDone(itemId: Long) = Action {
-        val x = entries.find(_.id == itemId)
-        x match {
-            case Some(item) => 
-                val newItem = item.copy(isDone = true)
-                entries += newItem
-                entries -= item
-                Ok(Json.toJson(newItem))
-            case None =>
-                BadRequest
-        }
-    }
-
     def addNewItem() = Action {
         implicit request =>
             val content = request.body
